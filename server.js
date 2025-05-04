@@ -11,7 +11,7 @@ app.get('/recent', async (req, res) => {
     try {
         const page = req.query.page || 1;
         const perPage = req.query.perPage || 24;
-        const url = `https://backend.gojo.wtf/api/anime/recent?type=anime&page=${page}&perPage=${perPage}`;
+        const url = `${process.env.BASE_URL}/api/anime/recent?type=anime&page=${page}&perPage=${perPage}`;
 
         const json = await cloudscraper({
             method: 'GET',
@@ -52,7 +52,7 @@ app.get('/trending', async (req, res) => {
     try {
         const page = req.query.page || 1;
         const perPage = req.query.perPage || 35;
-        const url = `https://backend.gojo.wtf/api/anime/search?query=&page=${page}&perPage=${perPage}&sort=trending`;
+        const url = `${process.env.BASE_URL}/api/anime/search?query=&page=${page}&perPage=${perPage}&sort=trending`;
 
         const json = await cloudscraper({
             method: 'GET',
@@ -95,7 +95,7 @@ app.get('/top', async (req, res) => {
         const perPage = req.query.perPage || 35;
         const season = req.query.season || 'SPRING'; // Default to SUMMER if not provided
         const year = req.query.year || new Date().getFullYear(); // Default to current year if not provided
-        const url = `https://backend.gojo.wtf/api/anime/search?query=&page=${page}&perPage=${perPage}&year=${year}&sort=RATING_DESC&season=${season}&format=any&status=any`;
+        const url = `${process.env.BASE_URL}/api/anime/search?query=&page=${page}&perPage=${perPage}&year=${year}&sort=RATING_DESC&season=${season}&format=any&status=any`;
 
         const json = await cloudscraper({
             method: 'GET',
@@ -138,7 +138,7 @@ app.get('/upcoming', async (req, res) => {
         const perPage = req.query.perPage || 35;
         const season = req.query.season || 'SUMMER'; // Default to SUMMER if not provided
         const year = req.query.year || new Date().getFullYear(); // Default to current year if not provided
-        const url = `https://backend.gojo.wtf/api/anime/search?query=&page=${page}&perPage=${perPage}&year=${year}&sort=popularity&season=${season}&format=any&status=any`;
+        const url = `${process.env.BASE_URL}/api/anime/search?query=&page=${page}&perPage=${perPage}&year=${year}&sort=popularity&season=${season}&format=any&status=any`;
 
         const json = await cloudscraper({
             method: 'GET',
@@ -180,7 +180,7 @@ app.get('/popular', async (req, res) => {
     try {
         const page = req.query.page || 1;
         const perPage = req.query.perPage || 35;
-        const url = `https://backend.gojo.wtf/api/anime/search?query=&page=${page}&perPage=${perPage}&year=any&sort=popularity&season=any&format=any&status=any`;
+        const url = `${process.env.BASE_URL}/api/anime/search?query=&page=${page}&perPage=${perPage}&year=any&sort=popularity&season=any&format=any&status=any`;
 
         const json = await cloudscraper({
             method: 'GET',
@@ -224,7 +224,7 @@ app.get('/episodes/:id', async (req, res) => {
         if (!id) {
             return res.status(400).json({ error: 'ID is required' });
         }
-        const url = `https://backend.gojo.wtf/api/anime/episodes/${id}`;
+        const url = `${process.env.BASE_URL}/api/anime/episodes/${id}`;
 
         const json = await cloudscraper({
             method: 'GET',
